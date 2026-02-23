@@ -1,10 +1,14 @@
 # Palindrome Checker App
 
-## A console-based Java application that validates whether a given string is a palindrome under different conditions. This project demonstrates core programming fundamentals and data structure concepts.
+A console-based Java application that validates whether a given string is a palindrome under different conditions. This project demonstrates core programming fundamentals and data structure concepts.
+
+---
 
 ## Overview
 
-## The Palindrome Checker App is designed to check if strings read the same forwards and backwards, implementing various use cases to demonstrate different programming concepts in Java.
+The Palindrome Checker App is designed to check if strings read the same forwards and backwards, implementing various use cases to demonstrate different programming concepts in Java.
+
+---
 
 ## Features
 
@@ -40,3 +44,5 @@ Name: Yatin Annam
 Registration Number: RA2411030010101
 
 ---
+
+S
