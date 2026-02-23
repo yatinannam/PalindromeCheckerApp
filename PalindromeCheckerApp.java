@@ -14,11 +14,14 @@ public class PalindromeCheckerApp {
         // UC3: Palindrome Check Using String Reverse
         checkPalindromeUsingReverse();
 
+        // UC4: Character Array Based Palindrome Check
+        checkPalindromeUsingCharArray();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
 
-    // Displays the welcome message with application name and version
+    // UC1: Displays the welcome message with application name and version
     private static void displayWelcomeMessage() {
         System.out.println("Welcome to the " + APP_NAME);
         System.out.println("Version : " + APP_VERSION);
@@ -64,5 +67,32 @@ public class PalindromeCheckerApp {
     private static boolean isPalindromeByReverse(String input) {
         String reversed = reverseString(input);
         return input.equals(reversed);
+    }
+
+    // UC4: Check palindrome using character array and two-pointer technique
+    private static void checkPalindromeUsingCharArray() {
+        String input = "radar";
+        boolean result = isPalindromeUsingCharArray(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome using char array and two-pointer approach
+    private static boolean isPalindromeUsingCharArray(String input) {
+        char[] chars = input.toCharArray();
+        int start = 0;
+        int end = chars.length - 1;
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        return isPalindrome;
     }
 }
