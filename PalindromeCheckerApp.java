@@ -11,6 +11,9 @@ public class PalindromeCheckerApp {
         // UC2: Print a Hardcoded Palindrome Result
         checkHardcodedPalindrome();
 
+        // UC3: Palindrome Check Using String Reverse
+        checkPalindromeUsingReverse();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
@@ -37,5 +40,29 @@ public class PalindromeCheckerApp {
             }
         }
         return true;
+    }
+
+    // UC3: Check palindrome by reversing the string
+    private static void checkPalindromeUsingReverse() {
+        String input = "madam";
+        boolean result = isPalindromeByReverse(input);
+        System.out.println("Input text: " + input);
+        System.out.println("Reversed text: " + reverseString(input));
+        System.out.println("Is it a palindrome? : " + result);
+    }
+
+    // Reverses a string using a loop
+    private static String reverseString(String input) {
+        String reversed = "";
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
+        }
+        return reversed;
+    }
+
+    // Checks if a string is a palindrome by comparing with its reverse
+    private static boolean isPalindromeByReverse(String input) {
+        String reversed = reverseString(input);
+        return input.equals(reversed);
     }
 }
