@@ -1,6 +1,8 @@
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Stack;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class PalindromeCheckerApp {
 
@@ -26,6 +28,9 @@ public class PalindromeCheckerApp {
 
         // UC6: Queue + Stack Based Palindrome Check
         checkPalindromeUsingQueueAndStack();
+
+        // UC7: Deque-Based Optimized Palindrome Checker
+        checkPalindromeUsingDeque();
 
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
@@ -160,6 +165,38 @@ public class PalindromeCheckerApp {
         // Dequeue from queue (FIFO) and pop from stack (LIFO) and compare
         while (!queue.isEmpty()) {
             if (queue.remove() != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        return isPalindrome;
+    }
+
+    // UC7: Check palindrome using Deque (Double Ended Queue)
+    private static void checkPalindromeUsingDeque() {
+        String input = "refer";
+        boolean result = isPalindromeUsingDeque(input);
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome using Deque front and rear access
+    private static boolean isPalindromeUsingDeque(String input) {
+        // Create a Deque to store characters
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // Add each character to the deque
+        for (char c : input.toCharArray()) {
+            deque.add(c);
+        }
+
+        // Flag to track palindrome result
+        boolean isPalindrome = true;
+
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
                 isPalindrome = false;
                 break;
             }
