@@ -40,7 +40,7 @@ System initialized successfully.
 
 ## Author
 
-Name: Yatin Annam
+Name: Yatin Annam<br>
 Registration Number: RA2411030010101
 
 ---
