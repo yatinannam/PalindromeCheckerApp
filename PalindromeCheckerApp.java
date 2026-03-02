@@ -38,6 +38,9 @@ public class PalindromeCheckerApp {
         // UC9: Recursive Palindrome Checker
         checkPalindromeUsingRecursion();
 
+        // UC10: Case-Insensitive & Space-Ignored Palindrome
+        checkPalindromeWithNormalization();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
@@ -272,5 +275,29 @@ public class PalindromeCheckerApp {
 
         // Recursive call: Move to next inner pair of characters
         return isPalindromeRecursive(input, start + 1, end - 1);
+    }
+
+    // UC10: Check palindrome ignoring spaces and case
+    private static void checkPalindromeWithNormalization() {
+        String input = "A man a plan a canal Panama";
+        boolean result = isPalindromeWithNormalization(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome after normalizing (removing spaces and
+    // converting to lowercase)
+    private static boolean isPalindromeWithNormalization(String input) {
+        // Normalize: Remove spaces and convert to lowercase
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+
+        // Check palindrome using two-pointer approach
+        for (int i = 0; i < normalized.length() / 2; i++) {
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
