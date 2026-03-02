@@ -32,6 +32,9 @@ public class PalindromeCheckerApp {
         // UC7: Deque-Based Optimized Palindrome Checker
         checkPalindromeUsingDeque();
 
+        // UC8: Linked List Based Palindrome Checker
+        checkPalindromeUsingLinkedList();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
@@ -197,6 +200,40 @@ public class PalindromeCheckerApp {
         // Continue comparison while more than one element exists
         while (deque.size() > 1) {
             if (deque.removeFirst() != deque.removeLast()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        return isPalindrome;
+    }
+
+    // UC8: Check palindrome using Linked List data structure
+    private static void checkPalindromeUsingLinkedList() {
+        String input = "level";
+        boolean result = isPalindromeUsingLinkedList(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome using LinkedList
+    // Compares characters from both ends by removing from front and back
+    private static boolean isPalindromeUsingLinkedList(String input) {
+        // Create a LinkedList to store characters
+        LinkedList<Character> list = new LinkedList<>();
+
+        // Add each character to the linked list
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
+
+        // Flag to track palindrome result
+        boolean isPalindrome = true;
+
+        // Continue comparison while more than one element exists
+        while (list.size() > 1) {
+            // Remove and compare first and last characters
+            if (list.removeFirst() != list.removeLast()) {
                 isPalindrome = false;
                 break;
             }
