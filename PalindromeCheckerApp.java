@@ -1,3 +1,9 @@
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Stack;
+import java.util.Deque;
+import java.util.ArrayDeque;
+
 public class PalindromeCheckerApp {
 
     // Application constants
@@ -11,11 +17,26 @@ public class PalindromeCheckerApp {
         // UC2: Print a Hardcoded Palindrome Result
         checkHardcodedPalindrome();
 
+        // UC3: Palindrome Check Using String Reverse
+        checkPalindromeUsingReverse();
+
+        // UC4: Character Array Based Palindrome Check
+        checkPalindromeUsingCharArray();
+
+        // UC5: Stack-Based Palindrome Checker
+        checkPalindromeUsingStack();
+
+        // UC6: Queue + Stack Based Palindrome Check
+        checkPalindromeUsingQueueAndStack();
+
+        // UC7: Deque-Based Optimized Palindrome Checker
+        checkPalindromeUsingDeque();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
 
-    // Displays the welcome message with application name and version
+    // UC1: Displays the welcome message with application name and version
     private static void displayWelcomeMessage() {
         System.out.println("Welcome to the " + APP_NAME);
         System.out.println("Version : " + APP_VERSION);
@@ -37,5 +58,150 @@ public class PalindromeCheckerApp {
             }
         }
         return true;
+    }
+
+    // UC3: Check palindrome by reversing the string
+    private static void checkPalindromeUsingReverse() {
+        String input = "madam";
+        boolean result = isPalindromeByReverse(input);
+        System.out.println("Input text: " + input);
+        System.out.println("Reversed text: " + reverseString(input));
+        System.out.println("Is it a palindrome? : " + result);
+    }
+
+    // Reverses a string using a loop
+    private static String reverseString(String input) {
+        String reversed = "";
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
+        }
+        return reversed;
+    }
+
+    // Checks if a string is a palindrome by comparing with its reverse
+    private static boolean isPalindromeByReverse(String input) {
+        String reversed = reverseString(input);
+        return input.equals(reversed);
+    }
+
+    // UC4: Check palindrome using character array and two-pointer technique
+    private static void checkPalindromeUsingCharArray() {
+        String input = "radar";
+        boolean result = isPalindromeUsingCharArray(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome using char array and two-pointer approach
+    private static boolean isPalindromeUsingCharArray(String input) {
+        char[] chars = input.toCharArray();
+        int start = 0;
+        int end = chars.length - 1;
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        return isPalindrome;
+    }
+
+    // UC5: Check palindrome using Stack data structure
+    private static void checkPalindromeUsingStack() {
+        String input = "noon";
+        boolean result = isPalindromeUsingStack(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome using Stack (LIFO principle)
+    private static boolean isPalindromeUsingStack(String input) {
+        Stack<Character> stack = new Stack<>();
+
+        // Push all characters into the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        boolean isPalindrome = true;
+
+        // Pop characters and compare with original
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        return isPalindrome;
+    }
+
+    // UC6: Check palindrome using Queue (FIFO) and Stack (LIFO)
+    private static void checkPalindromeUsingQueueAndStack() {
+        String input = "civic";
+        boolean result = isPalindromeUsingQueueAndStack(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome by comparing Queue (FIFO) vs Stack (LIFO)
+    private static boolean isPalindromeUsingQueueAndStack(String input) {
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+
+        // Enqueue to queue and push to stack
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
+        }
+
+        boolean isPalindrome = true;
+
+        // Dequeue from queue (FIFO) and pop from stack (LIFO) and compare
+        while (!queue.isEmpty()) {
+            if (queue.remove() != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        return isPalindrome;
+    }
+
+    // UC7: Check palindrome using Deque (Double Ended Queue)
+    private static void checkPalindromeUsingDeque() {
+        String input = "refer";
+        boolean result = isPalindromeUsingDeque(input);
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome using Deque front and rear access
+    private static boolean isPalindromeUsingDeque(String input) {
+        // Create a Deque to store characters
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // Add each character to the deque
+        for (char c : input.toCharArray()) {
+            deque.add(c);
+        }
+
+        // Flag to track palindrome result
+        boolean isPalindrome = true;
+
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        return isPalindrome;
     }
 }
