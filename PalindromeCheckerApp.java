@@ -35,6 +35,9 @@ public class PalindromeCheckerApp {
         // UC8: Linked List Based Palindrome Checker
         checkPalindromeUsingLinkedList();
 
+        // UC9: Recursive Palindrome Checker
+        checkPalindromeUsingRecursion();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
@@ -240,5 +243,34 @@ public class PalindromeCheckerApp {
         }
 
         return isPalindrome;
+    }
+
+    // UC9: Check palindrome using Recursion
+    private static void checkPalindromeUsingRecursion() {
+        String input = "madam";
+        boolean result = isPalindromeUsingRecursion(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Checks if a string is a palindrome using recursion
+    private static boolean isPalindromeUsingRecursion(String input) {
+        return isPalindromeRecursive(input, 0, input.length() - 1);
+    }
+
+    // Recursive method to check palindrome by comparing characters from both ends
+    private static boolean isPalindromeRecursive(String input, int start, int end) {
+        // Base condition: If start crosses or meets end, it's a palindrome
+        if (start >= end) {
+            return true;
+        }
+
+        // Compare characters at start and end positions
+        if (input.charAt(start) != input.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call: Move to next inner pair of characters
+        return isPalindromeRecursive(input, start + 1, end - 1);
     }
 }
