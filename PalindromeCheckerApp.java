@@ -47,6 +47,9 @@ public class PalindromeCheckerApp {
         // UC12: Strategy Pattern for Palindrome Algorithms
         checkPalindromeUsingStrategy();
 
+        // UC13: Performance Comparison
+        checkPalindromePerformance();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
@@ -331,6 +334,56 @@ public class PalindromeCheckerApp {
         result = dequeStrategy.check(input);
         System.out.println("Input: " + input);
         System.out.println("Is Palindrome? : " + result);
+    }
+
+    // UC13: Compare execution time of different palindrome algorithms
+    private static void checkPalindromePerformance() {
+        String input = "level";
+
+        // Two-pointer approach
+        long start = System.nanoTime();
+        boolean result = isPalindrome(input);
+        long end = System.nanoTime();
+        System.out.println("[Two-Pointer]");
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Execution Time: " + (end - start) + " ns");
+
+        // String reverse approach
+        start = System.nanoTime();
+        result = isPalindromeByReverse(input);
+        end = System.nanoTime();
+        System.out.println("[String Reverse]");
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Execution Time: " + (end - start) + " ns");
+
+        // Stack approach
+        start = System.nanoTime();
+        result = isPalindromeUsingStack(input);
+        end = System.nanoTime();
+        System.out.println("[Stack]");
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Execution Time: " + (end - start) + " ns");
+
+        // Deque approach
+        start = System.nanoTime();
+        result = isPalindromeUsingDeque(input);
+        end = System.nanoTime();
+        System.out.println("[Deque]");
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Execution Time: " + (end - start) + " ns");
+
+        // Recursive approach
+        start = System.nanoTime();
+        result = isPalindromeUsingRecursion(input);
+        end = System.nanoTime();
+        System.out.println("[Recursive]");
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Execution Time: " + (end - start) + " ns");
     }
 
     // Strategy interface defining the contract for palindrome checking algorithms
