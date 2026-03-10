@@ -44,6 +44,9 @@ public class PalindromeCheckerApp {
         // UC11: Object-Oriented Palindrome Service
         checkPalindromeUsingOOP();
 
+        // UC12: Strategy Pattern for Palindrome Algorithms
+        checkPalindromeUsingStrategy();
+
         // Program continues to next use case or exits
         System.out.println("System initialized successfully.");
     }
@@ -311,6 +314,62 @@ public class PalindromeCheckerApp {
         boolean result = checker.checkPalindrome(input);
         System.out.println("Input: " + input);
         System.out.println("Is Palindrome? : " + result);
+    }
+
+    // UC12: Demonstrates Strategy Pattern by injecting algorithm at runtime
+    private static void checkPalindromeUsingStrategy() {
+        String input = "level";
+
+        // Use StackStrategy
+        PalindromeStrategy stackStrategy = new StackStrategy();
+        boolean result = stackStrategy.check(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+
+        // Use DequeStrategy
+        PalindromeStrategy dequeStrategy = new DequeStrategy();
+        result = dequeStrategy.check(input);
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+
+    // Strategy interface defining the contract for palindrome checking algorithms
+    interface PalindromeStrategy {
+        boolean check(String input);
+    }
+
+    // Concrete strategy using Stack (LIFO) to check palindrome
+    static class StackStrategy implements PalindromeStrategy {
+        @Override
+        public boolean check(String input) {
+            java.util.Stack<Character> stack = new java.util.Stack<>();
+            for (char c : input.toCharArray()) {
+                stack.push(c);
+            }
+            for (char c : input.toCharArray()) {
+                if (c != stack.pop()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    // Concrete strategy using Deque (double-ended queue) to check palindrome
+    static class DequeStrategy implements PalindromeStrategy {
+        @Override
+        public boolean check(String input) {
+            Deque<Character> deque = new ArrayDeque<>();
+            for (char c : input.toCharArray()) {
+                deque.add(c);
+            }
+            while (deque.size() > 1) {
+                if (deque.removeFirst() != deque.removeLast()) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     // Static inner class demonstrating Encapsulation and Single Responsibility
